@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vanilla boilerplate</title>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.1/web3.min.js" integrity="sha512-vtUOC0YIaNm/UutU7yfnwqnF9LOYnXtpHe2kwi1nvJNloeGQuncNBiEKP/3Ww3D62USAhbXGsnYpAYoiDsa+wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/moralis-v1@1.11.0/dist/moralis.js"></script>
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<style>
+.container2{
+    height: 50vh;
+    width: 50vw;
+    margin: auto;
+    margin-top: 10em;
+    border: 1px solid black;
+    text-align: center;
+    box-shadow: 5px 10px grey;
+}
+form{
+    margin-top: 5em;
+  
+}
+#eth_add{
+    width: 90%;
+    margin-top: 1em;
+}
+#transfer_nft{
+    margin-top: 2em;
+}
+</style>
+
+<body >
+    <!-- <button >Click this button to transfer the NFT</button> -->
+
+    <div class="container2">
+    <button id="transfer_nft" onclick="transfernft()" type="button" class="btn btn-primary">Transfer NFT !</button>
+      
+    <form>
+        <strong>Put in your eth wallet address below</strong>
+        <input type="text"  name="eth_add" id="eth_add" placeholder="0x28badj">
+    </form>
+     </div>
+     <script>
+       var transfer_nft=document.getElementById("transfer_nft");
+var eth_add=document.getElementById("eth_add");
+var rec_add=0;
+transfer_nft.addEventListener("click",function () {
+    rec_add=eth_add.value;
+})
+
+
+Moralis.enableWeb3();
+async function transfernft(){
+    
+const options = {
+   type: 'erc721',
+//    receiver: '0x3014BdE9a0b9E6e0dfBE52c9f3eCa4Ca9E5bc17C',
+   receiver: rec_add.toString(),
+   contract_address: '0x757108b12b540056af2ea0810d76fea2f45fdcb5',
+   token_id: 2
+}
+
+let result = await Moralis.transfer(options);
+}
+
+     </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
